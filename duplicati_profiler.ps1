@@ -31,13 +31,16 @@
     How many largest file sizes to record (default 25).
 
 .EXAMPLE
-    ./duplicati_profiler.ps1 -Path C:\Users\me\Documents
+    .\duplicati_profiler.ps1 C:\Users\me\Documents
 
 .EXAMPLE
-    ./duplicati_profiler.ps1 -Path C:\data -Output profile.json
+    .\duplicati_profiler.ps1 C:\data -Output profile.json
 
 .EXAMPLE
-    ./duplicati_profiler.ps1 -Path C:\data -FollowSymlinks
+    .\duplicati_profiler.ps1 C:\data -FollowSymlinks
+
+.EXAMPLE
+    .\duplicati_profiler.ps1 C:\data\photos C:\data\docs D:\archive.iso -Output profile.json
 #>
 [CmdletBinding()]
 param(

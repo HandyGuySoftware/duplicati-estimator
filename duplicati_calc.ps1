@@ -15,7 +15,7 @@
     Together with duplicati_profiler.ps1 it lets a Windows user run the whole pipeline with
     no Python at all:
 
-        ./duplicati_profiler.ps1 -Path C:\data | ./duplicati_calc.ps1 -Dest remote
+        .\duplicati_profiler.ps1 C:\data | .\duplicati_calc.ps1 -Dest remote
 
     The profile may be supplied as a file path (-InputFile), piped in on stdin, or passed
     as the first positional argument. Requires PowerShell 7+.
@@ -27,7 +27,7 @@
     ./duplicati_calc.ps1 -InputFile profile.json -Dest remote -UpMbps 50 -DlCapGb 1
 
 .EXAMPLE
-    ./duplicati_profiler.ps1 -Path C:\data | ./duplicati_calc.ps1 -Dest local -ChangePattern archival -Versions 10
+    .\duplicati_profiler.ps1 C:\data | .\duplicati_calc.ps1 -Dest local -ChangePattern archival -Versions 10
 
 .EXAMPLE
     ./duplicati_calc.ps1 profile.json -AsJson

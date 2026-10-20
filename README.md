@@ -80,11 +80,11 @@ install from [aka.ms/powershell](https://aka.ms/powershell); it runs side-by-sid
 the Windows PowerShell 5.1 that ships in Windows).
 
 ```powershell
-./duplicati_profiler.ps1 C:\path\to\source -Output profile.json
+.\duplicati_profiler.ps1 C:\path\to\source -Output profile.json
 
 # Several locations at once — pass them positionally (directories and/or files).
 # They need not share a tree; overlapping paths are counted once.
-./duplicati_profiler.ps1 C:\data\photos C:\data\docs D:\archive.iso -Output profile.json
+.\duplicati_profiler.ps1 C:\data\photos C:\data\docs D:\archive.iso -Output profile.json
 ```
 
 Options:
@@ -167,7 +167,7 @@ pass `-`), so you can pipe the profiler straight into it instead of saving a fil
 python3 duplicati_profiler.py /path/to/source | python3 duplicati_calc.py --dest remote
 
 # The PowerShell profiler works the same way — the JSON contract is language-agnostic
-./duplicati_profiler.ps1 -Path C:\path\to\source | python3 duplicati_calc.py --dest remote
+.\duplicati_profiler.ps1 C:\path\to\source | python3 duplicati_calc.py --dest remote
 ```
 
 The profiler writes the JSON profile to stdout and its progress to stderr, so only the
@@ -180,11 +180,11 @@ pipeline without installing Python**:
 
 ```powershell
 # Two steps, or...
-./duplicati_profiler.ps1 -Path C:\path\to\source -Output profile.json
-./duplicati_calc.ps1 profile.json -Dest remote -UpMbps 50
+.\duplicati_profiler.ps1 C:\path\to\source -Output profile.json
+.\duplicati_calc.ps1 profile.json -Dest remote -UpMbps 50
 
 # ...pipe the profiler straight into the calculator
-./duplicati_profiler.ps1 -Path C:\path\to\source | ./duplicati_calc.ps1 -Dest remote
+.\duplicati_profiler.ps1 C:\path\to\source | .\duplicati_calc.ps1 -Dest remote
 ```
 
 It takes the same options as the Python CLI (PowerShell-style names: `-Dest`, `-UpMbps`,
@@ -227,7 +227,7 @@ Sources: ["Choosing sizes in Duplicati"](https://www.duplicati.com/articles/Choo
 and related threads from the [Duplicati Forum](https://forum.duplicati.com/) (block-size
 rules of thumb, cloud-volume convergence, performance benchmarks), as well as the awesome
 [Duplicati Storage Calculator](https://docs.google.com/spreadsheets/d/1woKfEqtTHxSidztNqjfmQELyIHu_yE1z0NLBZ8dxOCE/edit?pli=1&gid=1374005848#gid=1374005848)
-from forum user **kees-z**.
+from Duplicati Forum user **kees-z**.
 
 ---
 
@@ -300,3 +300,10 @@ python3 duplicati_calc.py profile.json --dest remote         # step 2 (CLI)
 # No Python? The all-PowerShell pipeline does the same:
 ./duplicati_profiler.ps1 -Path ~/Documents | ./duplicati_calc.ps1 -Dest remote
 ```
+
+---
+
+## License
+
+MIT — see [LICENSE](LICENSE). Free to use, modify, and distribute, provided the copyright
+notice and license text are retained in copies and derivative works.
