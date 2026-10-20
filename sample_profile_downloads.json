@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "scanned_path": "/Users/sdfried/Downloads",
+  "generated_at": "2026-10-19T13:04:00",
+  "total_bytes": 81128864801,
+  "file_count": 9480,
+  "mean_file_bytes": 8557897,
+  "median_file_bytes": 5721,
+  "median_is_exact": true,
+  "histogram": [
+    {
+      "label": "<10 KB",
+      "min_bytes": 0,
+      "max_bytes": 10240,
+      "count": 5549,
+      "bytes": 14987999
+    },
+    {
+      "label": "10-100 KB",
+      "min_bytes": 10240,
+      "max_bytes": 102400,
+      "count": 2152,
+      "bytes": 71632982
+    },
+    {
+      "label": "100 KB-1 MB",
+      "min_bytes": 102400,
+      "max_bytes": 1048576,
+      "count": 875,
+      "bytes": 284376757
+    },
+    {
+      "label": "1-10 MB",
+      "min_bytes": 1048576,
+      "max_bytes": 10485760,
+      "count": 505,
+      "bytes": 1899088875
+    },
+    {
+      "label": "10-100 MB",
+      "min_bytes": 10485760,
+      "max_bytes": 104857600,
+      "count": 170,
+      "bytes": 7044681747
+    },
+    {
+      "label": "100 MB-1 GB",
+      "min_bytes": 104857600,
+      "max_bytes": 1073741824,
+      "count": 227,
+      "bytes": 66028389109
+    },
+    {
+      "label": "1-10 GB",
+      "min_bytes": 1073741824,
+      "max_bytes": 10737418240,
+      "count": 2,
+      "bytes": 5785707332
+    },
+    {
+      "label": ">10 GB",
+      "min_bytes": 10737418240,
+      "max_bytes": null,
+      "count": 0,
+      "bytes": 0
+    }
+  ],
+  "largest_file_bytes": [
+    4687505408,
+    1098201924,
+    980347522,
+    961172670,
+    960058729
+  ],
+  "errors": {
+    "unreadable_paths": 0
+  }
+}
