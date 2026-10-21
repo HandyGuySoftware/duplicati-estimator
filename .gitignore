@@ -11,3 +11,4 @@ specs.md
 # Local profiles / scratch
 profile.json
 .DS_Store
+profiles/

@@ -175,6 +175,10 @@ def recommend(profile, dest, stability, change_pattern, up_mbps, dl_cap_gb,
         if vol_bytes > 2 * GB:
             vol_bytes = 2 * GB
             reasons.append("Clamped to 2 GB (larger volumes slow per-file restore processing).")
+        if stability == "unstable":
+            vol_bytes = min(vol_bytes, 100 * MB)
+            reasons.append("Unstable link (e.g. Wi-Fi) → capped at 100 MB so a dropped transfer "
+                           "re-sends less.")
     else:
         vol_bytes = 200 * MB
         reasons.append("Remote → starting at ~200 MB (range cloud users converged on).")

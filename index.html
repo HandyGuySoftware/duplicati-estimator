@@ -198,7 +198,7 @@ python3 duplicati_profiler.py /data/photos /data/docs /mnt/archive.iso -o profil
           <option value="stable" selected>Stable</option>
           <option value="unstable">Unstable / flaky</option>
         </select>
-        <div class="hint" style="margin-top:4px;">Remote only. <b>Unstable</b> caps the volume at 100 MB, so a failed upload re-sends less. No effect on local/LAN.</div>
+        <div class="hint" style="margin-top:4px;"><b>Unstable</b> (e.g. a laptop on Wi-Fi) caps the volume at 100 MB, so a dropped transfer re-sends less — applies to local/LAN and remote alike.</div>
       </div>
     </div>
     <div class="row" id="remoteOpts">
@@ -288,7 +288,7 @@ python3 duplicati_profiler.py /data/photos /data/docs /mnt/archive.iso -o profil
       <li><b>Local / LAN:</b> target about 10,000 backend files (index + block pairs) — <code>total&nbsp;/&nbsp;10000&nbsp;&times;&nbsp;2</code> — clamped to the 50&nbsp;MB–2&nbsp;GB range.</li>
       <li><b>Remote / cloud:</b> start around 200&nbsp;MB (the range cloud users converge on), then adjust: slow upload (&lt;&nbsp;10&nbsp;Mbps)&nbsp;→&nbsp;100&nbsp;MB so a failed transfer re-sends less; fast upload (≥&nbsp;200&nbsp;Mbps)&nbsp;→&nbsp;~500&nbsp;MB for fewer files.</li>
       <li><b>Daily download cap:</b> a verify or restore pulls a whole volume, so the volume is held to about ¼ of any cap you set.</li>
-      <li><b>Unstable connection:</b> capped at 100&nbsp;MB to limit what has to be re-transmitted after a failed upload.</li>
+      <li><b>Unstable connection</b> (including a laptop on Wi-Fi, for local/LAN or remote): capped at 100&nbsp;MB to limit what has to be re-transmitted after a dropped transfer.</li>
     </ul>
 
     <h3 style="font-size:15px;margin:16px 0 6px;">Compression</h3>
@@ -430,6 +430,7 @@ function recommend(){
     // Local disks tolerate large volumes; clamp to a sane 50MB..2GB range.
     if(dblockBytes < 50*MB){ dblockBytes=50*MB; reasons.push('Clamped up to the 50 MB default — tiny volumes create needless file churn.'); }
     if(dblockBytes > 2*GB){ dblockBytes=2*GB; reasons.push('Clamped to 2 GB — beyond this, per-file processing (decrypt/decompress) slows restores.'); }
+    if(stability==='unstable'){ dblockBytes=Math.min(dblockBytes,100*MB); reasons.push('Unstable link (e.g. Wi-Fi) → capped at 100 MB so a dropped transfer re-sends less.'); }
   } else {
     // Remote: converge on the 150–200 MB range users landed on, tune by bandwidth & cap.
     dblockBytes = 200*MB;

@@ -216,6 +216,26 @@ class TestRecommendVolume:
         val, unit = int(rec["dblock_size"][:-2]), rec["dblock_size"][-2:]
         assert parse_size_to_bytes(val, unit) <= 2 * GB
 
+    def test_lan_unstable_caps_at_100mb(self):
+        # An unstable LAN link (e.g. laptop on Wi-Fi) caps the volume at 100 MB,
+        # the same rule as remote. 800 GB would otherwise give ~150 MB.
+        stable = rec_defaults(make_profile(800 * GB), dest="lan", stability="stable")
+        unstable = rec_defaults(make_profile(800 * GB), dest="lan", stability="unstable")
+        s_val, s_unit = int(stable["dblock_size"][:-2]), stable["dblock_size"][-2:]
+        u_val, u_unit = int(unstable["dblock_size"][:-2]), unstable["dblock_size"][-2:]
+        assert parse_size_to_bytes(s_val, s_unit) > 100 * MB   # stable keeps the larger size
+        assert parse_size_to_bytes(u_val, u_unit) <= 100 * MB  # unstable is capped
+
+    def test_local_unstable_caps_at_100mb(self):
+        rec = rec_defaults(make_profile(800 * GB), dest="local", stability="unstable")
+        val, unit = int(rec["dblock_size"][:-2]), rec["dblock_size"][-2:]
+        assert parse_size_to_bytes(val, unit) <= 100 * MB
+
+    def test_lan_stable_not_capped_by_stability(self):
+        # Sanity: the cap only fires when unstable; a stable LAN is unaffected.
+        rec = rec_defaults(make_profile(800 * GB), dest="lan", stability="stable")
+        assert not any("Wi-Fi" in r for r in rec["reasons"])
+
 
 # --------------------------------------------------------------------------- #
 # recommend — projections (reference-sheet formulas)

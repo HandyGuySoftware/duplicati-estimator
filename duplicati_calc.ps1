@@ -240,6 +240,11 @@ function Get-Recommendation {
             $volBytes = 2 * $GB
             $reasons.Add("Clamped to 2 GB (larger volumes slow per-file restore processing).")
         }
+        if ($Stability -eq 'unstable') {
+            $volBytes = [math]::Min($volBytes, 100 * $MB)
+            $reasons.Add("Unstable link (e.g. Wi-Fi) → capped at 100 MB so a dropped transfer " +
+                "re-sends less.")
+        }
     }
     else {
         $volBytes = 200 * $MB
