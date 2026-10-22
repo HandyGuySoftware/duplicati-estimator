@@ -136,6 +136,8 @@ use the hosted copy on GitHub Pages. Then:
 
 All computation happens locally in your browser; nothing is uploaded.
 
+For your convenience, there is also an [on-line graphical calculator](https://handyguysoftware.github.io/duplicati-estimator/) avaialble for your use. Both share the same code, so it's just personal preference as to which you'd like to use.
+
 ### Option B — Command line (`duplicati_calc.py`)
 
 ```bash
