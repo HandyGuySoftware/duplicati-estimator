@@ -96,6 +96,18 @@ Options:
 | `-FollowSymlinks` | Follow symlinks / reparse points (default: skip them) |
 | `-TopN N` | How many of the largest file sizes to record (default: 25) |
 
+> **Running scripts on Windows:** PowerShell blocks local script execution by default, so
+> `.\duplicati_profiler.ps1` may fail with a message about scripts being disabled on this
+> system. To allow it for your own user (no admin rights needed), run once:
+>
+> ```powershell
+> Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+> ```
+>
+> `RemoteSigned` lets local scripts you wrote run while still requiring downloaded scripts to
+> be signed. Alternatively, run a single script without changing your policy:
+> `pwsh -ExecutionPolicy Bypass -File .\duplicati_profiler.ps1 ...`
+
 > **Tip:** pass multiple paths positionally (as above), not as `-Path a b c` — naming
 > `-Path` explicitly only takes the first value.
 
@@ -191,6 +203,12 @@ It takes the same options as the Python CLI (PowerShell-style names: `-Dest`, `-
 `-DlCapGb`, `-ChangePattern`, `-Versions`, `-Compression`, `-ChangeAmt`, `-ChangeUnit`,
 `-Stability`, `-AsJson`) and produces identical output. Like the Python version it reads a
 profile from a file path, a positional argument, or stdin.
+
+> **Running scripts on Windows:** like the profiler, `.\duplicati_calc.ps1` may be blocked
+> by PowerShell's default execution policy. To enable it for your own user (no admin needed),
+> run once: `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` — or run a single script
+> without changing your policy: `pwsh -ExecutionPolicy Bypass -File .\duplicati_calc.ps1 ...`
+> (see the PowerShell profiler section under Step 1 for the full explanation).
 
 ---
 
